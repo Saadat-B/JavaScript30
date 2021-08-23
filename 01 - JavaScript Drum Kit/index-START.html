@@ -9,6 +9,48 @@
 
 
   <div class="keys">
+
+    <div data-key="81" class="key">
+      <kbd>Q</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="87" class="key">
+      <kbd>W</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="69" class="key">
+      <kbd>E</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="82" class="key">
+      <kbd>R</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="84" class="key">
+      <kbd>T</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="89" class="key">
+      <kbd>Y</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="85" class="key">
+      <kbd>U</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="73" class="key">
+      <kbd>I</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="79" class="key">
+      <kbd>O</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="80" class="key">
+      <kbd>P</kbd>
+      <span class="sound">clap</span>
+    </div>
+
     <div data-key="65" class="key">
       <kbd>A</kbd>
       <span class="sound">clap</span>
@@ -57,8 +99,43 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
+  <audio data-key="81" src="sounds/Pack#4_Percussion_Bell Metal.wav"></audio>
+  <audio data-key="87" src="sounds/Pack#4_Percussion_Bell Tap.wav"></audio>
+  <audio data-key="69" src="sounds/Pack#4_Percussion_Bells Harsh Panning.wav"></audio>
+  <audio data-key="82" src="sounds/Pack#4_Percussion_Castanets.wav"></audio>
+  <audio data-key="84" src="sounds/Pack#4_Percussion_Clave 1.wav"></audio>
+  <audio data-key="89" src="sounds/Pack#4_Percussion_Clave 2.wav"></audio>
+  <audio data-key="85" src="sounds/Pack#4_Percussion_Dissonant Bells.wav"></audio>
+  <audio data-key="73" src="sounds/Pack#4_Percussion_Elastic Metal 1.wav"></audio>
+  <audio data-key="79" src="sounds/Pack#4_Percussion_Elastic Metal 2.wav"></audio>
+  <audio data-key="80" src="sounds/Pack#4_Percussion_Elastic Metal 3.wav"></audio>
 
+  <audio data-key="90" src="sounds/Pack#4_Percussion_Elastic Metal 4.wav"></audio>
+  <audio data-key="88" src="sounds/Pack#4_Percussion_Handclaps 1.wav"></audio>
+  <audio data-key="67" src="sounds/Pack#4_Percussion_Handclaps 2.wav"></audio>
+  <audio data-key="86" src="sounds/Pack#4_Percussion_Oneshot Shaker 1.wav"></audio>
+  <audio data-key="66" src="sounds/Pack#4_Percussion_Oneshot Shaker 2.wav"></audio>
+  <audio data-key="78" src="sounds/Pack#4_Percussion_Oneshot Shaker 3.wav"></audio>
+  <audio data-key="77" src="sounds/Pack#4_Percussion_Oneshot Shaker 4.wav"></audio>
+  
+
+<script>
+  function playSound(e){
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key = "${e.keyCode}"]`)
+    if(!audio)return; //stop the function from running all together
+    audio.currentTime = 0; //rewind to the start
+    audio.play();
+    key.classList.add('playing');
+  }
+  function removeTransition(e){
+    if(e.propertyName !== 'transform')return;
+    this.classList.remove('playing');
+  }
+  const keys = document.querySelectorAll('.key')
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  
+  window.addEventListener('keydown', playSound);
 </script>
 
 
