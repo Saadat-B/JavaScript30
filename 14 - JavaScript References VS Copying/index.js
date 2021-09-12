@@ -18,9 +18,6 @@ team[0] = "bosss"
 console.log(players);
 console.log(team);
 
-
-
-
 // You might think we can just do something like this:
 
 // however what happens when we update that array?
@@ -35,9 +32,18 @@ console.log(team);
 
 // one way
 
+const team2 = players.slice();
+console.log(team2);
+team2[0] = "woah";
+console.log(team2);
+
+
 // or create a new array and concat the old one in
 
 // or use the new ES6 Spread
+
+const team3 = [...players];
+console.log(team3);
 
 // now when we update it, the original one isn't changed
 
@@ -52,6 +58,9 @@ const person = {
 // and think we make a copy:
 
 // how do we take a copy instead?
+
+const person2 = Object.assign({},person, {age : 100});
+console.log(person2);
 
 // We will hopefully soon see the object ...spread
 
